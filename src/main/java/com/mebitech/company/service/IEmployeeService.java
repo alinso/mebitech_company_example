@@ -1,6 +1,5 @@
 package com.mebitech.company.service;
 
-import com.mebitech.company.dao.IGenericDAO;
 import com.mebitech.company.entity.Employee;
 
 import java.util.List;
@@ -8,9 +7,9 @@ import java.util.List;
 public interface IEmployeeService {
 
 
-    public Employee findOne(Integer id);
+    public Employee get(Integer id);
 
-    List<Employee> findAll();
+    List<Employee> getAll();
 
     void create(Employee e);
 

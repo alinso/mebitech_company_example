@@ -28,18 +28,18 @@ public class Employee implements Serializable {
     private String surname;
 
     @Column(name="salary")
-    private double salary;
+    private Integer salary;
 
     @ManyToOne
     @JoinColumn(name="department_id")
     private Department department;
 
 
-    public double getSalary() {
+    public Integer getSalary() {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(Integer salary) {
         this.salary = salary;
     }
 
@@ -65,5 +65,13 @@ public class Employee implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }

@@ -1,37 +1,36 @@
 package com.mebitech.company.service;
 
-import com.mebitech.company.dao.IEmployeeDAO;
-import com.mebitech.company.entity.Employee;
+import com.mebitech.company.dao.IDepartmentDAO;
+import com.mebitech.company.entity.Department;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class EmployeeService implements IEmployeeService{
+public class DepartmentService implements IDepartmentService {
 
 
     @Autowired
-    IEmployeeDAO dao;
-
+  IDepartmentDAO  dao;
 
     @Override
-    public Employee get(Integer id) {
-        return  dao.get(id);
+    public Department get(Integer id) {
+        return null;
     }
 
     @Override
-    public List<Employee> getAll() {
+    public List<Department> getAll() {
         return dao.getAll();
     }
 
     @Override
-    public void create(Employee e) {
+    public void create(Department e) {
 
     }
 
     @Override
-    public Employee update(Employee e) {
+    public Department update(Department e) {
         return null;
     }
 

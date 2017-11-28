@@ -4,12 +4,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name="department")
-public class Department {
+public class Department implements Serializable{
 
     @Id
     @Column(name="id")

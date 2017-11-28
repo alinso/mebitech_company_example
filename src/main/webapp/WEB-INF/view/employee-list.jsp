@@ -7,7 +7,7 @@
 <body>
 <c:forEach var="employee" items="${employees}" varStatus="loop">
     <h1>${employee.name}</h1>
-    <h1>${employee.salary}</h1>
+    <h1>${employee.department.name}</h1>
 
 </c:forEach>
 </body>

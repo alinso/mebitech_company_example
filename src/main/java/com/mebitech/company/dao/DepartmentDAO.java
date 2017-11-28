@@ -1,19 +1,16 @@
 package com.mebitech.company.dao;
 
-import com.mebitech.company.entity.Employee;
+import com.mebitech.company.entity.Department;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
-
 @Repository
-public class EmployeeDAO implements IEmployeeDAO {
-
-
+public class DepartmentDAO implements IDepartmentDAO{
     @Autowired
     SessionFactory sessionFactory;
 
@@ -23,23 +20,24 @@ public class EmployeeDAO implements IEmployeeDAO {
     }
 
     @Transactional
-    public void saveOrUpdate(Employee e) {
+    public void saveOrUpdate(Department e) {
         getCurrentSession().saveOrUpdate(e);
     }
 
     @Transactional
-    public Employee get(Integer id) {
-        return  getCurrentSession().get( Employee.class, id );
+    public Department get(Integer id) {
+        return  getCurrentSession().get( Department.class, id );
     }
 
     @Transactional
-    public List<Employee> getAll() {
-        return getCurrentSession().createQuery( "from Employee" ).list();
+    public List<Department> getAll() {
+        return getCurrentSession().createQuery( "from Department" ).list();
     }
 
     @Transactional
-    public void delete(Employee e) {
+    public void delete(Department e) {
         getCurrentSession().delete(e);
 
     }
+
 }
