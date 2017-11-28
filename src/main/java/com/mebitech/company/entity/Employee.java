@@ -5,10 +5,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Entity
 @Table(name="employee")
-public class Employee {
+public class Employee implements Serializable {
 
     @Id
     @Column(name="id")
@@ -26,7 +27,7 @@ public class Employee {
     @Size(max=20)
     private String surname;
 
-    @Column(name="name")
+    @Column(name="salary")
     private double salary;
 
     @ManyToOne

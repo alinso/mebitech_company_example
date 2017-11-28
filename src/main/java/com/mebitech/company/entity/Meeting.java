@@ -1,5 +1,6 @@
 package com.mebitech.company.entity;
 
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -8,30 +9,29 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="department")
-public class Department {
-
+@Table(name="meeting")
+public class Meeting {
     @Id
     @Column(name="id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
-
 
     @Column(name="name")
     @NotEmpty
     @Size(max=20)
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER,mappedBy="department")
-    private Set<Employee> employees;
+    @Column(name="description")
+    @NotEmpty
+    private String description;
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "department_meeting",
-            joinColumns = { @JoinColumn(name = "department_id") },
-            inverseJoinColumns = { @JoinColumn(name = "meeting_id") }
+            joinColumns = { @JoinColumn(name = "meeting_id") },
+            inverseJoinColumns = { @JoinColumn(name = "department_id") }
     )
-    Set<Meeting> meetings = new HashSet<>();
+    Set<Department> departments = new HashSet<>();
 
     public int getId() {
         return id;
@@ -49,19 +49,19 @@ public class Department {
         this.name = name;
     }
 
-    public Set<Employee> getEmployees() {
-        return employees;
+    public String getDescription() {
+        return description;
     }
 
-    public void setEmployees(Set<Employee> employees) {
-        this.employees = employees;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Set<Meeting> getMeetings() {
-        return meetings;
+    public Set<Department> getDepartments() {
+        return departments;
     }
 
-    public void setMeetings(Set<Meeting> meetings) {
-        this.meetings = meetings;
+    public void setDepartments(Set<Department> departments) {
+        this.departments = departments;
     }
 }
