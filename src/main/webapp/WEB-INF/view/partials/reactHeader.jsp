@@ -1,4 +1,5 @@
-
+<meta charset="utf-8" />
+<script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js" charset="utf-8"></script>
 <script src="https://unpkg.com/react@16.2.0/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@16.2.0/umd/react-dom.development.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/0.31.5/react-bootstrap.js"></script>
@@ -7,11 +8,14 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 <body></body>
 
-<script>
+<script type="text/babel">
 
 
 var node = document.createElement("div");
 var container  =document.createElement("div");
+
+
+
 container.className += " col-md-8";
 document.getElementsByTagName('body')[0].appendChild(node);
 document.getElementsByTagName('body')[0].appendChild(container);
@@ -44,28 +48,13 @@ ReactDOM.render(navInstance, node);
 
 
 
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-function FieldGroup(_ref) {
-    var id = _ref.id,
-        label = _ref.label,
-        help = _ref.help,
-        props = _objectWithoutProperties(_ref, ["id", "label", "help"]);
-
-    return React.createElement(
-        ReactBootstrap.FormGroup,
-        { controlId: id },
-        React.createElement(
-            ReactBootstrap.ControlLabel,
-            null,
-            label
-        ),
-        React.createElement(ReactBootstrap.FormControl, props),
-        help && React.createElement(
-        ReactBootstrap.HelpBlock,
-        null,
-        help
-        )
+function FieldGroup({ id, label, help, ...props }) {
+    return (
+            <ReactBootstrap.FormGroup controlId={id}>
+                <ReactBootstrap.ControlLabel>{label}</ReactBootstrap.ControlLabel>
+                <ReactBootstrap.FormControl {...props} />
+                {help && <ReactBootstrap.HelpBlock>{help}</ReactBootstrap.HelpBlock>}
+            </ReactBootstrap.FormGroup>
     );
 }
 </script>
