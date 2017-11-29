@@ -1,10 +1,12 @@
 package com.mebitech.company.controller;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mebitech.company.entity.Department;
 import com.mebitech.company.entity.Employee;
 import com.mebitech.company.service.IDepartmentService;
 import com.mebitech.company.service.IEmployeeService;
+import com.mebitech.company.viewModel.EmployeeEdit;
 import com.mebitech.company.viewModel.EmployeeFormViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,12 +46,12 @@ public String saveEmployee(@RequestBody EmployeeFormViewModel employeeFormViewMo
         employee.setSalary(employeeFormViewModel.getSalary());
 
         employeeService.saveOrUpdate(employee);
-        return "{\"result\":\"1\"}";
+        return Integer.toString(employee.getId());
 }
 
 
     @GetMapping("/edit-employee/{employee_id}")
-    public String editEmployee(@PathVariable(value="employee_id") Integer employee_id, Model md){
+    public String editEmployeeold(@PathVariable(value="employee_id") Integer employee_id, Model md){
         Employee e = employeeService.get(employee_id);
         List<Department> departments  = departmentService.getAll();
 
@@ -57,8 +59,13 @@ public String saveEmployee(@RequestBody EmployeeFormViewModel employeeFormViewMo
         EmployeeFormViewModel eViewModel  =new EmployeeFormViewModel();
         eViewModel.setId(e.getId());
 
+        Integer departmentId;
+        if(e.getDepartment()==null)
+            departmentId=0;
+        else
+            departmentId  =e.getDepartment().getId();
 
-        eViewModel.setDepartmentId(e.getDepartment().getId());
+        eViewModel.setDepartmentId(departmentId);
         eViewModel.setSalary(e.getSalary());
         eViewModel.setName(e.getName());
         eViewModel.setSurname(e.getSurname());
@@ -73,12 +80,56 @@ public String saveEmployee(@RequestBody EmployeeFormViewModel employeeFormViewMo
         return "edit-employee";
     }
 
+    @GetMapping("/editEmployee/{employee_id}")
+    public String editEmployee(@PathVariable(value="employee_id") Integer employee_id,Model md){
+        md.addAttribute("id",employee_id);
+        return "editEmployee";
+    }
+
+
+    @GetMapping("/editEmployeeRest/{employee_id}")
+    @ResponseBody
+    public String editEmployeeRestful(@PathVariable(value="employee_id") Integer employee_id, Model md) throws Exception{
+        Employee e = employeeService.get(employee_id);
+        List<Department> departments  = departmentService.getAll();
+
+
+        EmployeeEdit employeeEdit  =new EmployeeEdit();
+        employeeEdit.setId(e.getId());
+
+        Integer departmentId;
+        if(e.getDepartment()==null)
+            departmentId=0;
+        else
+            departmentId  =e.getDepartment().getId();
+
+        employeeEdit.setDepartmentId(departmentId);
+        employeeEdit.setSalary(e.getSalary());
+        employeeEdit.setName(e.getName());
+        employeeEdit.setSurname(e.getSurname());
+
+        String title;
+        if(employee_id==0) title="Add New Employee";
+        else title="Edit Employee";
+
+        employeeEdit.setTitle(title);
+        employeeEdit.setDepartments(departments);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonData = mapper.writeValueAsString(employeeEdit);
+
+        return jsonData;
+    }
+
+
+
 
 
     @PostMapping("/delete-employee/{employee_id}")
+    @ResponseBody
     public String deleteEmployee(@PathVariable(value="employee_id") Integer employee_id){
         employeeService.deleteById(employee_id);
-        return "{\"result\":\"1\"}";
+        return "deleted";
     }
 
 }

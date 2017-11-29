@@ -1,5 +1,7 @@
 package com.mebitech.company.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -28,9 +30,10 @@ public class Department implements Serializable{
     private String name;
 
     @OneToMany(fetch = FetchType.EAGER,mappedBy="department")
+    @JsonBackReference
     private Set<Employee> employees;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
     @JoinTable(
             name = "department_meeting",
             joinColumns = { @JoinColumn(name = "department_id") },

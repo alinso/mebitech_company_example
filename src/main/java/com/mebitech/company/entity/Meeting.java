@@ -25,7 +25,7 @@ public class Meeting {
     @NotEmpty
     private String description;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     @JoinTable(
             name = "department_meeting",
             joinColumns = { @JoinColumn(name = "meeting_id") },

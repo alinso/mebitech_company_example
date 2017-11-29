@@ -26,7 +26,7 @@ public class DepartmentController {
 
     @PostMapping("/save-department")
     @ResponseBody
-    public String saveEmployee(@RequestBody Department departmentForm){
+    public String saveDepartment(@RequestBody Department departmentForm){
 
         Department department = new Department();
         department.setId(departmentForm.getId());
@@ -35,7 +35,7 @@ public class DepartmentController {
 
 
         departmentService.saveOrUpdate(department);
-        return "{\"result\":\"1\"}";
+        return Integer.toString(department.getId());
     }
 
 
@@ -54,8 +54,9 @@ public class DepartmentController {
 
 
     @PostMapping("/delete-department/{department_id}")
+    @ResponseBody
     public String deleteEmployee(@PathVariable(value="department_id") Integer department_id){
         departmentService.deleteById(department_id);
-        return "{\"result\":\"1\"}";
+        return "deleted";
     }
 }

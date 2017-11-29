@@ -37,4 +37,10 @@ public class DepartmentService implements IDepartmentService {
     public void deleteById(Integer id) {
         dao.delete(id);
     }
+
+    public Department getFirst(){
+        List<Department> departments  =getAll();
+       Department d = departments.get(0);
+       return d;
+    }
 }

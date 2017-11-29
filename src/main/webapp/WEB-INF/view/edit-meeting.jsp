@@ -22,7 +22,6 @@
 </form:form>
 
 
-<div id="texts"></div>
 <script>
 
     document.getElementById("save_meeting").addEventListener("click", function(){

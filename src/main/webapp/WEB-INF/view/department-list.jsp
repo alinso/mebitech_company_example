@@ -6,6 +6,7 @@
 
 <body>
 
+<h3>${title}</h3>
 <table class="table">
     <thead>
     <tr>

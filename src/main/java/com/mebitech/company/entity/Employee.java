@@ -1,6 +1,7 @@
 package com.mebitech.company.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -30,8 +31,9 @@ public class Employee implements Serializable {
     @Column(name="salary")
     private Integer salary=0;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="department_id")
+    @JsonManagedReference
     private Department department = new Department();
 
 
