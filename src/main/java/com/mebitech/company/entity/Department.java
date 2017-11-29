@@ -18,6 +18,10 @@ public class Department implements Serializable{
     private int id;
 
 
+    @Column(name="description")
+    private String description;
+
+
     @Column(name="name")
     @NotEmpty
     @Size(max=20)
@@ -64,5 +68,13 @@ public class Department implements Serializable{
 
     public void setMeetings(Set<Meeting> meetings) {
         this.meetings = meetings;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

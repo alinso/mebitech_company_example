@@ -10,11 +10,16 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 
-    <!-- Bootsrap and react js-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/<react-version>/react.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/<react-version>/react-dom.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/<version>/react-bootstrap.min.js"></script>
 
+   <!-- <script src="${pageContext.request.contextPath}/node_modules/react/cjs/react.production.min.js"></script>
+    <script src="${pageContext.request.contextPath}/node_modules/react-dom/cjs/react-dom.development.js"></script>
+    <script src="${pageContext.request.contextPath}/node_modules/react-bootstrap/dist/react-bootstrap.js"></script>
+-->
+    <script src="https://unpkg.com/react@16.2.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.2.0/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/0.31.5/react-bootstrap.js"></script>
+    <script src="${pageContext.request.contextPath}/require.js"></script>
+    <script src="${pageContext.request.contextPath}/app.js"></script>
 
 </head>
 

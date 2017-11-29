@@ -11,9 +11,9 @@ public interface IEmployeeService {
 
     List<Employee> getAll();
 
-    void create(Employee e);
 
-    Employee update(Employee e);
+
+    void saveOrUpdate(Employee e);
 
     void deleteById(Integer id);
 }

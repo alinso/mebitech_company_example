@@ -1,34 +1,34 @@
 package com.mebitech.company.service;
 
-import com.mebitech.company.dao.IEmployeeDAO;
-import com.mebitech.company.entity.Employee;
+import com.mebitech.company.dao.IMeetingDAO;
+import com.mebitech.company.entity.Meeting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class EmployeeService implements IEmployeeService{
+public class MeetingService implements IMeetingService {
 
 
     @Autowired
-    IEmployeeDAO dao;
+    IMeetingDAO dao;
 
 
     @Override
-    public Employee get(Integer id) {
+    public Meeting get(Integer id) {
         return  dao.get(id);
     }
 
     @Override
-    public List<Employee> getAll() {
+    public List<Meeting> getAll() {
         return dao.getAll();
     }
 
 
     @Override
-    public void saveOrUpdate(Employee e) {
-        dao.saveOrUpdate(e);
+    public void saveOrUpdate(Meeting m) {
+        dao.saveOrUpdate(m);
 
     }
 

@@ -9,9 +9,8 @@ public interface IDepartmentService {
 
     List<Department> getAll();
 
-    void create(Department d);
 
-    Department update(Department d);
+    void saveOrUpdate(Department d);
 
     void deleteById(Integer id);
 }

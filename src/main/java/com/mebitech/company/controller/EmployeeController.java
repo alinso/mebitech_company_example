@@ -3,15 +3,13 @@ package com.mebitech.company.controller;
 
 import com.mebitech.company.entity.Department;
 import com.mebitech.company.entity.Employee;
-import com.mebitech.company.service.EmployeeService;
 import com.mebitech.company.service.IDepartmentService;
 import com.mebitech.company.service.IEmployeeService;
-import com.mebitech.company.viewModel.EmployeeViewModel;
+import com.mebitech.company.viewModel.EmployeeFormViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,15 +31,37 @@ public class EmployeeController {
     return "employee-list";
 }
 
+@PostMapping("/save-employee")
+@ResponseBody
+public String saveEmployee(@RequestBody EmployeeFormViewModel employeeFormViewModel){
+
+        Employee employee = new Employee();
+        Department department = departmentService.get(employeeFormViewModel.getDepartmentId());
+        employee.setId(employeeFormViewModel.getId());
+        employee.setName(employeeFormViewModel.getName());
+        employee.setDepartment(department);
+        employee.setSurname(employeeFormViewModel.getSurname());
+        employee.setSalary(employeeFormViewModel.getSalary());
+
+        employeeService.saveOrUpdate(employee);
+        return "{\"result\":\"1\"}";
+}
+
 
     @GetMapping("/edit-employee/{employee_id}")
     public String editEmployee(@PathVariable(value="employee_id") Integer employee_id, Model md){
         Employee e = employeeService.get(employee_id);
         List<Department> departments  = departmentService.getAll();
-        EmployeeViewModel eViewModel = new EmployeeViewModel();
 
-        eViewModel.setEmployee(e);
+
+        EmployeeFormViewModel eViewModel  =new EmployeeFormViewModel();
+        eViewModel.setId(e.getId());
+
+
         eViewModel.setDepartmentId(e.getDepartment().getId());
+        eViewModel.setSalary(e.getSalary());
+        eViewModel.setName(e.getName());
+        eViewModel.setSurname(e.getSurname());
 
         String title;
         if(employee_id==0) title="Add New Employee";
@@ -51,7 +71,14 @@ public class EmployeeController {
         md.addAttribute("eViewModel",eViewModel);
         md.addAttribute("departments",departments);
         return "edit-employee";
+    }
 
+
+
+    @PostMapping("/delete-employee/{employee_id}")
+    public String deleteEmployee(@PathVariable(value="employee_id") Integer employee_id){
+        employeeService.deleteById(employee_id);
+        return "{\"result\":\"1\"}";
     }
 
 }

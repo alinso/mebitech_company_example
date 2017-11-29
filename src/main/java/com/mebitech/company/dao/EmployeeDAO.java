@@ -29,7 +29,12 @@ public class EmployeeDAO implements IEmployeeDAO {
 
     @Transactional
     public Employee get(Integer id) {
-        return  getCurrentSession().get( Employee.class, id );
+
+        Employee e =   getCurrentSession().get( Employee.class, id );
+        if(e==null)
+            e = new Employee();
+        return e;
+
     }
 
     @Transactional
@@ -38,7 +43,8 @@ public class EmployeeDAO implements IEmployeeDAO {
     }
 
     @Transactional
-    public void delete(Employee e) {
+    public void delete(Integer id) {
+        Employee e  =get(id);
         getCurrentSession().delete(e);
 
     }

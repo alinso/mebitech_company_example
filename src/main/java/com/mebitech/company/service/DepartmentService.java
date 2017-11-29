@@ -16,7 +16,11 @@ public class DepartmentService implements IDepartmentService {
 
     @Override
     public Department get(Integer id) {
-        return null;
+
+        Department d = dao.get(id);
+        if(d==null)
+            d = new Department();
+        return d;
     }
 
     @Override
@@ -25,17 +29,12 @@ public class DepartmentService implements IDepartmentService {
     }
 
     @Override
-    public void create(Department e) {
-
-    }
-
-    @Override
-    public Department update(Department e) {
-        return null;
+    public void saveOrUpdate(Department d){
+        dao.saveOrUpdate(d);
     }
 
     @Override
     public void deleteById(Integer id) {
-
+        dao.delete(id);
     }
 }

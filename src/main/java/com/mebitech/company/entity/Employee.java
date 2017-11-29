@@ -28,11 +28,11 @@ public class Employee implements Serializable {
     private String surname;
 
     @Column(name="salary")
-    private Integer salary;
+    private Integer salary=0;
 
     @ManyToOne
     @JoinColumn(name="department_id")
-    private Department department;
+    private Department department = new Department();
 
 
     public Integer getSalary() {

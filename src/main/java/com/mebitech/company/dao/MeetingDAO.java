@@ -1,6 +1,6 @@
 package com.mebitech.company.dao;
 
-import com.mebitech.company.entity.Department;
+import com.mebitech.company.entity.Meeting;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public class DepartmentDAO implements IDepartmentDAO{
+public class MeetingDAO implements IMeetingDAO {
+
     @Autowired
     SessionFactory sessionFactory;
 
@@ -20,25 +21,29 @@ public class DepartmentDAO implements IDepartmentDAO{
     }
 
     @Transactional
-    public void saveOrUpdate(Department e) {
-        getCurrentSession().saveOrUpdate(e);
+    public void saveOrUpdate(Meeting m) {
+        getCurrentSession().saveOrUpdate(m);
     }
 
     @Transactional
-    public Department get(Integer id) {
-        return  getCurrentSession().get( Department.class, id );
+    public Meeting get(Integer id) {
+
+        Meeting m =   getCurrentSession().get( Meeting.class, id );
+        if(m==null)
+            m = new Meeting();
+        return m;
+
     }
 
     @Transactional
-    public List<Department> getAll() {
-        return getCurrentSession().createQuery( "from Department" ).list();
+    public List<Meeting> getAll() {
+        return getCurrentSession().createQuery( "from Meeting" ).list();
     }
 
     @Transactional
     public void delete(Integer id) {
-        Department d = get(id);
-        getCurrentSession().delete(d);
+        Meeting m  =get(id);
+        getCurrentSession().delete(m);
 
     }
-
 }
