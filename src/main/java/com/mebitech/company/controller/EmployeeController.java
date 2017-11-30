@@ -25,13 +25,24 @@ public class EmployeeController {
 
 
 
-@GetMapping("/employee-list")
-    public String employeeList(Model md){
-    List<Employee> employees = employeeService.getAll();
-    md.addAttribute("employees", employees);
-    md.addAttribute("title","List Of Employees");
-    return "employee-list";
-}
+    @GetMapping("/employee-list")
+        public String employeeList(Model md){
+        return "employeeList";
+    }
+
+
+
+    @GetMapping("/employeeListRest")
+    @ResponseBody
+    public String employeeListRest() throws Exception{
+        List<Employee> employees = employeeService.getAll();
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonData = mapper.writeValueAsString(employees);
+
+        return jsonData;
+    }
+
+
 
 @PostMapping("/save-employee")
 @ResponseBody
@@ -50,37 +61,8 @@ public String saveEmployee(@RequestBody EmployeeFormViewModel employeeFormViewMo
 }
 
 
+
     @GetMapping("/edit-employee/{employee_id}")
-    public String editEmployeeold(@PathVariable(value="employee_id") Integer employee_id, Model md){
-        Employee e = employeeService.get(employee_id);
-        List<Department> departments  = departmentService.getAll();
-
-
-        EmployeeFormViewModel eViewModel  =new EmployeeFormViewModel();
-        eViewModel.setId(e.getId());
-
-        Integer departmentId;
-        if(e.getDepartment()==null)
-            departmentId=0;
-        else
-            departmentId  =e.getDepartment().getId();
-
-        eViewModel.setDepartmentId(departmentId);
-        eViewModel.setSalary(e.getSalary());
-        eViewModel.setName(e.getName());
-        eViewModel.setSurname(e.getSurname());
-
-        String title;
-        if(employee_id==0) title="Add New Employee";
-        else title="Edit Employee";
-
-        md.addAttribute("title",title);
-        md.addAttribute("eViewModel",eViewModel);
-        md.addAttribute("departments",departments);
-        return "edit-employee";
-    }
-
-    @GetMapping("/editEmployee/{employee_id}")
     public String editEmployee(@PathVariable(value="employee_id") Integer employee_id,Model md){
         md.addAttribute("id",employee_id);
         return "editEmployee";

@@ -1,5 +1,6 @@
 package com.mebitech.company.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mebitech.company.entity.Department;
 import com.mebitech.company.entity.Meeting;
 import com.mebitech.company.service.IDepartmentService;
@@ -74,12 +75,37 @@ public class MeetingController {
         return "show-attendants";
     }
 
-    @GetMapping("/meeting-list")
-    public String meetingList(Model md){
+    @GetMapping("/meetingListRest")
+    @ResponseBody
+    public String meetingListRest(Model md) throws Exception{
         List<Meeting> meetings = meetingService.getAll();
-        md.addAttribute("meetings", meetings);
-        md.addAttribute("title","List Of Meetings");
-        return "meeting-list";
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonData = mapper.writeValueAsString(meetings);
+        return jsonData;
+    }
+
+
+    @GetMapping("/meeting-list")
+    public String meetingList(){
+        return "meetingList";
+    }
+
+
+    @GetMapping("/editMeetingRest/{meeting_id}")
+    @ResponseBody
+    public String editMeetingRest(@PathVariable(value="meeting_id") Integer meeting_id) throws Exception{
+        Meeting m = meetingService.get(meeting_id);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonData = mapper.writeValueAsString(m);
+        return jsonData;
+    }
+
+
+    @GetMapping("/edit-meeting/{meeting_id}")
+    public String editDepartment(@PathVariable(value="meeting_id") Integer meeting_id, Model md){
+        md.addAttribute("meeting_id",meeting_id);
+        return "editMeeting";
     }
 
 
@@ -97,19 +123,7 @@ public class MeetingController {
     }
 
 
-    @GetMapping("/edit-meeting/{meeting_id}")
-    public String editEmployee(@PathVariable(value="meeting_id") Integer meeting_id, Model md){
-        Meeting m = meetingService.get(meeting_id);
 
-
-        String title;
-        if(meeting_id==0) title="Add New Meeting";
-        else title="Edit Meeting";
-
-        md.addAttribute("title",title);
-        md.addAttribute("meeting",m);
-        return "edit-meeting";
-    }
 
     @PostMapping("/delete-meeting/{meeting_id}")
     @ResponseBody

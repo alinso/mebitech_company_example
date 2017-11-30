@@ -1,7 +1,9 @@
 package com.mebitech.company.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mebitech.company.entity.Department;
 import com.mebitech.company.service.IDepartmentService;
+import com.mebitech.company.viewModel.DepartmentEdit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +18,18 @@ public class DepartmentController {
     IDepartmentService departmentService;
 
     @GetMapping("/department-list")
-    public String employeeList(Model md){
+    public String departmentList() {
+        return "departmentList";
+    }
+
+    @GetMapping("/departmentListRest")
+    @ResponseBody
+    public String departmentListRest(Model md) throws Exception{
         List<Department> departments = departmentService.getAll();
-        md.addAttribute("departments", departments);
-        md.addAttribute("title","List Of Departments");
-        return "department-list";
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonData = mapper.writeValueAsString(departments);
+
+        return jsonData;
     }
 
 
@@ -40,17 +49,31 @@ public class DepartmentController {
 
 
     @GetMapping("/edit-department/{department_id}")
-    public String editEmployee(@PathVariable(value="department_id") Integer department_id, Model md){
-        Department d = departmentService.get(department_id);
-
-        String title;
-        if(department_id==0) title="Add New Employee";
-        else title="Edit Employee";
-
-        md.addAttribute("title",title);
-        md.addAttribute("department",d);
-        return "edit-department";
+    public String editDepartment(@PathVariable(value="department_id") Integer department_id, Model md){
+        md.addAttribute("department_id",department_id);
+        return "editDepartment";
     }
+
+    @GetMapping("/editDepartmentRest/{department_id}")
+    @ResponseBody
+    public String editDepartmentRest(@PathVariable(value="department_id") Integer department_id) throws Exception{
+        Department d = departmentService.get(department_id);
+        DepartmentEdit departmentEdit  =new DepartmentEdit();
+        String title;
+        if(department_id==0) title="Add New Department";
+        else title="Edit Department";
+
+        departmentEdit.setTitle(title);
+        departmentEdit.setDescription(d.getDescription());
+        departmentEdit.setName(d.getName());
+        departmentEdit.setId(d.getId());
+
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonData = mapper.writeValueAsString(departmentEdit);
+
+        return jsonData;
+    }
+
 
 
     @PostMapping("/delete-department/{department_id}")

@@ -28,7 +28,7 @@
         function onDropdownSelected(e) {
             console.log("THE VAL", e.target.value);
         }
-        
+
         const formInstance = (
             <form>
                 <FieldGroup

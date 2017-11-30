@@ -6,6 +6,8 @@
 <script src="${pageContext.request.contextPath}/require.js"></script>
 <script src="${pageContext.request.contextPath}/app.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+
+
 <body></body>
 
 <script type="text/babel">
@@ -27,19 +29,19 @@ ReactBootstrap.Nav,
 
 React.createElement(
 ReactBootstrap.NavItem,
-{ eventKey: 1, href: "/employeeList" },
+{ eventKey: 1, href: "/employee-list" },
 "Employees"
 ),
 
 React.createElement(
 ReactBootstrap.NavItem,
-{ eventKey: 2, href: "/departmentList" },
+{ eventKey: 2, href: "/department-list" },
 "Departments"
 ),
 
 React.createElement(
 ReactBootstrap.NavItem,
-{ eventKey: 3, href: "/meetingList" },
+{ eventKey: 3, href: "/meeting-list" },
 "Meetings"
 )
 );
