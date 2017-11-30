@@ -1,6 +1,6 @@
 package com.mebitech.company.service;
 
-import com.mebitech.company.dao.IMeetingDAO;
+import com.mebitech.company.dao.IGenericDAO;
 import com.mebitech.company.entity.Meeting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,9 +11,13 @@ import java.util.List;
 public class MeetingService implements IMeetingService {
 
 
-    @Autowired
-    IMeetingDAO dao;
+    IGenericDAO< Meeting > dao;
 
+    @Autowired
+    public void setDao( IGenericDAO< Meeting > daoToSet ){
+        dao = daoToSet;
+        dao.setClazz( Meeting.class );
+    }
 
     @Override
     public Meeting get(Integer id) {

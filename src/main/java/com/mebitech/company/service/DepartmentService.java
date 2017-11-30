@@ -1,6 +1,5 @@
 package com.mebitech.company.service;
-
-import com.mebitech.company.dao.IDepartmentDAO;
+import com.mebitech.company.dao.IGenericDAO;
 import com.mebitech.company.entity.Department;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,8 +10,13 @@ import java.util.List;
 public class DepartmentService implements IDepartmentService {
 
 
+    IGenericDAO< Department > dao;
+
     @Autowired
-  IDepartmentDAO  dao;
+    public void setDao( IGenericDAO< Department > daoToSet ){
+        dao = daoToSet;
+        dao.setClazz( Department.class );
+    }
 
     @Override
     public Department get(Integer id) {

@@ -26,6 +26,7 @@ public class MeetingController {
 
 
 
+
     @PostMapping("/add-department-to-meeting")
     public String  addDepartmentToMeeting(@RequestBody MeetingDepartmentFormViewModel mViewModel){
         Meeting meeting = meetingService.get(mViewModel.getMeetingId());

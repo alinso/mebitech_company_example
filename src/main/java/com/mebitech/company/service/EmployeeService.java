@@ -1,6 +1,6 @@
 package com.mebitech.company.service;
 
-import com.mebitech.company.dao.IEmployeeDAO;
+import com.mebitech.company.dao.IGenericDAO;
 import com.mebitech.company.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,9 +10,13 @@ import java.util.List;
 @Service
 public class EmployeeService implements IEmployeeService{
 
+    IGenericDAO< Employee > dao;
 
     @Autowired
-    IEmployeeDAO dao;
+    public void setDao( IGenericDAO< Employee > daoToSet ){
+        dao = daoToSet;
+        dao.setClazz( Employee.class );
+    }
 
 
     @Override
