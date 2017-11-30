@@ -30,7 +30,7 @@
                     <FieldGroup
                             id="departmentDescription"
                             type="text"
-                            label="Employee Surname"
+                            label="Department Description"
                             placeholder="Enter Description"
                             defaultValue = {data.description}
 

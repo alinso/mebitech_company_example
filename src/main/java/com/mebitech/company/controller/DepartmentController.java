@@ -63,10 +63,10 @@ public class DepartmentController {
     @ResponseBody
     public String editDepartmentRest(@PathVariable(value="department_id") Integer department_id) throws Exception{
         Department d = departmentService.get(department_id);
+        if(d==null)
+            d= new Department();
         DepartmentEditViewModel departmentEdit  =new DepartmentEditViewModel();
-        String title;
-        if(department_id==0) title="Add New Department";
-        else title="Edit Department";
+      
 
         departmentEdit.setDescription(d.getDescription());
         departmentEdit.setName(d.getName());

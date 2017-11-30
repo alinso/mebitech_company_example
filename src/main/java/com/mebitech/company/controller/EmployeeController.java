@@ -74,6 +74,9 @@ public String saveEmployee(@RequestBody EmployeeFormViewModel employeeFormViewMo
     @ResponseBody
     public String editEmployeeRestful(@PathVariable(value="employee_id") Integer employee_id, Model md) throws Exception{
         Employee e = employeeService.get(employee_id);
+        if(e==null)
+            e= new Employee();
+
         List<Department> departments  = departmentService.getAll();
 
 

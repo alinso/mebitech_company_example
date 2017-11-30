@@ -30,6 +30,8 @@ public class MeetingController {
     @PostMapping("/add-department-to-meeting")
     public String  addDepartmentToMeeting(@RequestBody MeetingDepartmentFormViewModel mViewModel){
         Meeting meeting = meetingService.get(mViewModel.getMeetingId());
+        if(meeting==null)
+            meeting= new Meeting();
         Department newDepartment = departmentService.get(mViewModel.getDepartmentId());
 
         Set<Department>departments =  meeting.getDepartments();
