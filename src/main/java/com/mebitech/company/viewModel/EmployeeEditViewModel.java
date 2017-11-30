@@ -4,7 +4,7 @@ import com.mebitech.company.entity.Department;
 
 import java.util.List;
 
-public class EmployeeEdit {
+public class EmployeeEditViewModel {
     private int id;
     private String name;
     private String surname;

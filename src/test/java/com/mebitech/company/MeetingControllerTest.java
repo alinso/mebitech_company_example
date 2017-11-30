@@ -36,9 +36,9 @@ public class MeetingControllerTest extends CompanyApplicationTests{
 
     @Test
     public void getAll() throws Exception {
-        mockMvc.perform(get("/department-list"))
+        mockMvc.perform(get("/meeting-list"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("department-list"));
+                .andExpect(view().name("meetingList"));
     }
 
     @Test

@@ -1,10 +1,10 @@
 package com.mebitech.company.viewModel;
 
-public class DepartmentEdit {
+public class MeetingEditViewModel {
     private Integer id;
     private String name;
     private String description;
-    private String title;
+
 
     public Integer getId() {
         return id;
@@ -28,13 +28,5 @@ public class DepartmentEdit {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 }

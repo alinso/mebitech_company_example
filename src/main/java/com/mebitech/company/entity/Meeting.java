@@ -1,6 +1,7 @@
 package com.mebitech.company.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ public class Meeting {
     private String description;
 
     @ManyToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+    @JsonManagedReference
     @JoinTable(
             name = "department_meeting",
             joinColumns = { @JoinColumn(name = "meeting_id") },

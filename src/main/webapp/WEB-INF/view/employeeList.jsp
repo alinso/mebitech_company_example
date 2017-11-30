@@ -1,8 +1,21 @@
 <jsp:include page="partials/reactHeader.jsp" />
 
 <script type="text/babel">
+    document.title = "Employee List";
+
+    const buttonInstance = (
+            <ReactBootstrap.ButtonToolbar>
+                <a href={'/edit-employee/0'}>
+                <ReactBootstrap.Button bsStyle="success">Add New</ReactBootstrap.Button>
+                </a>
+            </ReactBootstrap.ButtonToolbar>
+    );
+
+    ReactDOM.render(buttonInstance, titleDiv);
 
     getJSONP("/employeeListRest/",function(obj) {
+
+
 
 
         class TableRow extends React.Component {

@@ -34,6 +34,7 @@ public class Department implements Serializable{
     private Set<Employee> employees;
 
     @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+    @JsonBackReference
     @JoinTable(
             name = "department_meeting",
             joinColumns = { @JoinColumn(name = "department_id") },

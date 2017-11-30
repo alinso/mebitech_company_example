@@ -6,6 +6,7 @@ import com.mebitech.company.entity.Meeting;
 import com.mebitech.company.service.IDepartmentService;
 import com.mebitech.company.service.IMeetingService;
 import com.mebitech.company.viewModel.MeetingDepartmentFormViewModel;
+import com.mebitech.company.viewModel.MeetingEditViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -111,12 +112,12 @@ public class MeetingController {
 
     @PostMapping("/save-meeting")
     @ResponseBody
-    public String saveMeeting(@RequestBody Meeting meetingForm){
+    public String saveMeeting(@RequestBody MeetingEditViewModel meetingEditViewModel){
 
         Meeting meeting = new Meeting();
-        meeting.setId(meetingForm.getId());
-        meeting.setName(meetingForm.getName());
-        meeting.setDescription(meetingForm.getDescription());
+        meeting.setId(meetingEditViewModel.getId());
+        meeting.setName(meetingEditViewModel.getName());
+        meeting.setDescription(meetingEditViewModel.getDescription());
 
         meetingService.saveOrUpdate(meeting);
         return Integer.toString(meeting.getId());

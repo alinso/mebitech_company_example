@@ -1,7 +1,7 @@
 <jsp:include page="partials/reactHeader.jsp" />
 <script type="text/babel">
+    document.title = "Edit/New Employee";
     getJSONP("/editEmployeeRest/${employee_id}",function(data) {
-        document.title = data['title'];
 
         var saveIt = function () {
             var eData  ={};

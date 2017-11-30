@@ -15,11 +15,13 @@
 
 var node = document.createElement("div");
 var container  =document.createElement("div");
+var titleDiv  =document.createElement("div");
 
 
 
 container.className += " col-md-8";
 document.getElementsByTagName('body')[0].appendChild(node);
+document.getElementsByTagName('body')[0].appendChild(titleDiv);
 document.getElementsByTagName('body')[0].appendChild(container);
 
 var navInstance = React.createElement(

@@ -39,7 +39,7 @@ public class DepartmetControllerTest extends CompanyApplicationTests {
     public void getAll() throws Exception {
         mockMvc.perform(get("/department-list"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("department-list"));
+                .andExpect(view().name("departmentList"));
     }
 
     @Test

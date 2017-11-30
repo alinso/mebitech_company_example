@@ -3,7 +3,7 @@ package com.mebitech.company.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mebitech.company.entity.Department;
 import com.mebitech.company.service.IDepartmentService;
-import com.mebitech.company.viewModel.DepartmentEdit;
+import com.mebitech.company.viewModel.DepartmentEditViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,10 +17,13 @@ public class DepartmentController {
     @Autowired
     IDepartmentService departmentService;
 
+
     @GetMapping("/department-list")
     public String departmentList() {
         return "departmentList";
     }
+
+
 
     @GetMapping("/departmentListRest")
     @ResponseBody
@@ -35,12 +38,12 @@ public class DepartmentController {
 
     @PostMapping("/save-department")
     @ResponseBody
-    public String saveDepartment(@RequestBody Department departmentForm){
+    public String saveDepartment(@RequestBody DepartmentEditViewModel departmentViewModel){
 
         Department department = new Department();
-        department.setId(departmentForm.getId());
-        department.setName(departmentForm.getName());
-        department.setDescription(departmentForm.getDescription());
+        department.setId(departmentViewModel.getId());
+        department.setName(departmentViewModel.getName());
+        department.setDescription(departmentViewModel.getDescription());
 
 
         departmentService.saveOrUpdate(department);
@@ -54,16 +57,17 @@ public class DepartmentController {
         return "editDepartment";
     }
 
+
+
     @GetMapping("/editDepartmentRest/{department_id}")
     @ResponseBody
     public String editDepartmentRest(@PathVariable(value="department_id") Integer department_id) throws Exception{
         Department d = departmentService.get(department_id);
-        DepartmentEdit departmentEdit  =new DepartmentEdit();
+        DepartmentEditViewModel departmentEdit  =new DepartmentEditViewModel();
         String title;
         if(department_id==0) title="Add New Department";
         else title="Edit Department";
 
-        departmentEdit.setTitle(title);
         departmentEdit.setDescription(d.getDescription());
         departmentEdit.setName(d.getName());
         departmentEdit.setId(d.getId());

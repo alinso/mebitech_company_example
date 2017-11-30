@@ -43,7 +43,7 @@ public class EmployeeControllerTest extends CompanyApplicationTests {
     public void getAll() throws Exception {
         mockMvc.perform(get("/employee-list"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("employee-list"));
+                .andExpect(view().name("employeeList"));
     }
 
 

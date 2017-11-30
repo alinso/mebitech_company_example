@@ -6,7 +6,7 @@ import com.mebitech.company.entity.Department;
 import com.mebitech.company.entity.Employee;
 import com.mebitech.company.service.IDepartmentService;
 import com.mebitech.company.service.IEmployeeService;
-import com.mebitech.company.viewModel.EmployeeEdit;
+import com.mebitech.company.viewModel.EmployeeEditViewModel;
 import com.mebitech.company.viewModel.EmployeeFormViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +27,7 @@ public class EmployeeController {
 
     @GetMapping("/employee-list")
         public String employeeList(Model md){
+
         return "employeeList";
     }
 
@@ -76,7 +77,7 @@ public String saveEmployee(@RequestBody EmployeeFormViewModel employeeFormViewMo
         List<Department> departments  = departmentService.getAll();
 
 
-        EmployeeEdit employeeEdit  =new EmployeeEdit();
+        EmployeeEditViewModel employeeEdit  =new EmployeeEditViewModel();
         employeeEdit.setId(e.getId());
 
         Integer departmentId;
@@ -90,11 +91,6 @@ public String saveEmployee(@RequestBody EmployeeFormViewModel employeeFormViewMo
         employeeEdit.setName(e.getName());
         employeeEdit.setSurname(e.getSurname());
 
-        String title;
-        if(employee_id==0) title="Add New Employee";
-        else title="Edit Employee";
-
-        employeeEdit.setTitle(title);
         employeeEdit.setDepartments(departments);
 
         ObjectMapper mapper = new ObjectMapper();
