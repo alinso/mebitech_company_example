@@ -12,3 +12,5 @@ your IDE by using JDK9 and Tomcat9.
 -You need to access the imported database of application that is running in your MySQL.
 
 -Then you can run source code in IDE, at www.yourdoman.com you should see the welcome page. 
+
+*The sql file is at https://github.com/alinso/mebitech_company_example/blob/master/mebitech.sql
