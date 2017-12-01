@@ -10,7 +10,7 @@
             </ReactBootstrap.ButtonToolbar>
     );
 
-    ReactDOM.render(buttonInstance, titleDiv);
+    ReactDOM.render(buttonInstance, buttonDiv);
 
     getJSONP("/employeeListRest/",function(obj) {
 

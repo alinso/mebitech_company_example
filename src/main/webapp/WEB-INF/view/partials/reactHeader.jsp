@@ -16,6 +16,7 @@
 var node = document.createElement("div");
 var container  =document.createElement("div");
 var titleDiv  =document.createElement("div");
+var buttonDiv  =document.createElement("div");
 
 
 var setPageTitle  =function(text){
@@ -27,6 +28,7 @@ var setPageTitle  =function(text){
 container.className += " col-md-8";
 document.getElementsByTagName('body')[0].appendChild(node);
 document.getElementsByTagName('body')[0].appendChild(titleDiv);
+document.getElementsByTagName('body')[0].appendChild(buttonDiv);
 document.getElementsByTagName('body')[0].appendChild(container);
 
 var navInstance = React.createElement(

@@ -11,7 +11,7 @@
             </ReactBootstrap.ButtonToolbar>
     );
 
-    ReactDOM.render(buttonInstance, titleDiv);
+    ReactDOM.render(buttonInstance, buttonDiv);
     getJSONP("/departmentListRest",function(obj) {
 
 

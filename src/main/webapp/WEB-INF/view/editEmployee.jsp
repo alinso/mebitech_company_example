@@ -55,7 +55,7 @@
 
 
                 <ReactBootstrap.FormGroup controlId="formControlsSelect">
-                    <ReactBootstrap.ControlLabel>Select</ReactBootstrap.ControlLabel>
+                    <ReactBootstrap.ControlLabel>Select Department</ReactBootstrap.ControlLabel>
                     <ReactBootstrap.FormControl componentClass="select" placeholder="select" id="departmentId">
                         {createSelectItems()}
                     </ReactBootstrap.FormControl>
