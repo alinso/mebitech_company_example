@@ -1,8 +1,7 @@
 <jsp:include page="partials/reactHeader.jsp" />
 
 <script type="text/babel">
-    document.title = "Employee List";
-
+    setPageTitle("Employee List");
     const buttonInstance = (
             <ReactBootstrap.ButtonToolbar>
                 <a href={'/edit-employee/0'}>

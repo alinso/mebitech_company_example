@@ -5,6 +5,7 @@ import com.mebitech.company.entity.Department;
 import com.mebitech.company.entity.Meeting;
 import com.mebitech.company.service.IDepartmentService;
 import com.mebitech.company.service.IMeetingService;
+import com.mebitech.company.viewModel.MeetingDepartmentEditViewModel;
 import com.mebitech.company.viewModel.MeetingDepartmentFormViewModel;
 import com.mebitech.company.viewModel.MeetingEditViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,19 +65,33 @@ public class MeetingController {
 
 
 
-    @GetMapping("/show-attendants/{meeting_id}")
-    public String showAttendants(@PathVariable(value="meeting_id") Integer meeting_id, Model md){
+    @GetMapping("/showAttendantRest/{meeting_id}")
+    @ResponseBody
+    public String showAttendantRest(@PathVariable(value="meeting_id") Integer meeting_id) throws  Exception{
         Meeting m = meetingService.get(meeting_id);
         Set<Department> enrolledDepartments = m.getDepartments();
         List<Department> allDepartments = departmentService.getAll();
         MeetingDepartmentFormViewModel meetingDepartment  =new MeetingDepartmentFormViewModel();
+        MeetingDepartmentEditViewModel meetingEditViewModel = new MeetingDepartmentEditViewModel();
 
-        md.addAttribute("meeting",m);
-        md.addAttribute("meetingDepartment",meetingDepartment);
-        md.addAttribute("enrolledDepartments",enrolledDepartments);
-        md.addAttribute("allDepartments",allDepartments);
 
-        return "show-attendants";
+
+        meetingEditViewModel.setMeeting(m);
+        meetingEditViewModel.setMeetimgDepartments(enrolledDepartments);
+        meetingEditViewModel.setMeetingDepartmentFormViewModel(meetingDepartment);
+        meetingEditViewModel.setAllDepartments(allDepartments);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonData = mapper.writeValueAsString(meetingEditViewModel);
+        return jsonData;
+    }
+
+
+    @GetMapping("show-attendants/{meeting_id}")
+    public String showAttendants(@PathVariable(value="meeting_id") Integer meeting_id,Model md){
+        md.addAttribute("meeting_id",meeting_id);
+
+        return "showAttendants";
     }
 
     @GetMapping("/meetingListRest")

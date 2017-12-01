@@ -66,7 +66,7 @@ public class DepartmentController {
         if(d==null)
             d= new Department();
         DepartmentEditViewModel departmentEdit  =new DepartmentEditViewModel();
-      
+
 
         departmentEdit.setDescription(d.getDescription());
         departmentEdit.setName(d.getName());

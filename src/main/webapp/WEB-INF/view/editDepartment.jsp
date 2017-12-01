@@ -1,6 +1,6 @@
 <jsp:include page="partials/reactHeader.jsp" />
 <script type="text/babel">
-    document.title = "Edit/New Department";
+    setPageTitle("Edit Department");
     getJSONP("/editDepartmentRest/${department_id}",function(data) {
 
         var saveIt = function () {

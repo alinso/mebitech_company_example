@@ -2,7 +2,7 @@
 
 <script type="text/babel">
 
-    document.title = "Meeting List";
+    setPageTitle("Meeting List");
     const buttonInstance = (
             <ReactBootstrap.ButtonToolbar>
                 <a href={'/edit-meeting/0'}>

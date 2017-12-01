@@ -18,6 +18,11 @@ var container  =document.createElement("div");
 var titleDiv  =document.createElement("div");
 
 
+var setPageTitle  =function(text){
+    document.title = text;
+    titleDiv.innerHTML = '<h4>'+text+'<h4><br/><br/>';
+}
+
 
 container.className += " col-md-8";
 document.getElementsByTagName('body')[0].appendChild(node);

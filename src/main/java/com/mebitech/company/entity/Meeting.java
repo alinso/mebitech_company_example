@@ -27,7 +27,7 @@ public class Meeting  implements Serializable {
     @NotEmpty
     private String description;
 
-    @ManyToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE , fetch = FetchType.EAGER)
     @JsonManagedReference
     @JoinTable(
             name = "department_meeting",

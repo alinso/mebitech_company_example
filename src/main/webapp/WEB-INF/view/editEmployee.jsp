@@ -1,6 +1,6 @@
 <jsp:include page="partials/reactHeader.jsp" />
 <script type="text/babel">
-    document.title = "Edit/New Employee";
+    setPageTitle("Edit Employee");
     getJSONP("/editEmployeeRest/${employee_id}",function(data) {
 
         var saveIt = function () {
@@ -25,9 +25,6 @@
             return items;
         }
 
-        function onDropdownSelected(e) {
-            console.log("THE VAL", e.target.value);
-        }
 
         const formInstance = (
             <form>
@@ -59,7 +56,7 @@
 
                 <ReactBootstrap.FormGroup controlId="formControlsSelect">
                     <ReactBootstrap.ControlLabel>Select</ReactBootstrap.ControlLabel>
-                    <ReactBootstrap.FormControl componentClass="select" placeholder="select" id="departmentId" onChange={onDropdownSelected} >
+                    <ReactBootstrap.FormControl componentClass="select" placeholder="select" id="departmentId">
                         {createSelectItems()}
                     </ReactBootstrap.FormControl>
                 </ReactBootstrap.FormGroup>
